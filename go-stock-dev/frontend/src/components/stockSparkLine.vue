@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, onBeforeMount, ref, watchEffect} from "vue";
+import {onMounted, onBeforeUnmount, onBeforeMount, ref, watchEffect} from "vue";
 import * as echarts from 'echarts';
 import {GetStockMinutePriceLineData} from "../../wailsjs/go/main/App"; // 如果您使用多个组件，请将此样式导入放在您的主文件中
 const {idSuffix,stockCode,stockName,lastPrice,openPrice,darkTheme} = defineProps({
@@ -118,13 +118,37 @@ function setChartData(chart) {
       ]
     };
     chart.setOption(option);
+    chart.resize();
   })
 }
 const chart =ref( null)
+let resizeObserver = null
 
 onMounted(() => {
-  chart.value = echarts.init( document.getElementById('sparkLine'+stockCode+idSuffix));
+  const el = document.getElementById('sparkLine'+stockCode+idSuffix);
+  if (!el) return;
+  chart.value = echarts.init(el);
   setChartData(chart.value);
+  // 卡片所在标签页初次显示时容器宽度才确定，监听尺寸变化后重绘，避免迷你分时图空白
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(() => {
+      if (chart.value) {
+        chart.value.resize();
+      }
+    });
+    resizeObserver.observe(el);
+  }
+})
+
+onBeforeUnmount(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect();
+    resizeObserver = null;
+  }
+  if (chart.value) {
+    chart.value.dispose();
+    chart.value = null;
+  }
 })
 
 
@@ -136,6 +160,6 @@ watchEffect(() => {
 
 </script>
 <template>
-<div style="height: 20px;width: 100%"  :id="'sparkLine'+stockCode+idSuffix">
+<div style="height: 44px;width: 100%"  :id="'sparkLine'+stockCode+idSuffix">
 </div>
 </template>

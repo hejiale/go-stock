@@ -746,31 +746,29 @@ function onSplitDown(e: MouseEvent) {
   e.preventDefault()
 }
 
-// ===== 订单列表分页：默认 10 条，滚动到底部加载更多 =====
+// ===== 订单列表分页：每页 10 条，点击页码翻页（不再滚动到底部自动加载） =====
 const ORDER_PAGE_SIZE = 10
-const openVisible = ref(ORDER_PAGE_SIZE)
-const histVisible = ref(ORDER_PAGE_SIZE)
-const openShown = computed(() => openOrders.value.slice(0, openVisible.value))
-const histShown = computed(() => historyOrders.value.slice(0, histVisible.value))
-
-function onOrdersScroll(which: 'open' | 'history', e: Event) {
-  const el = e.target as HTMLElement
-  if (!el) return
-  if (el.scrollTop + el.clientHeight < el.scrollHeight - 8) return
-  const total = which === 'open' ? openOrders.value.length : historyOrders.value.length
-  const cur = which === 'open' ? openVisible.value : histVisible.value
-  if (cur < total) {
-    if (which === 'open') openVisible.value = Math.min(cur + ORDER_PAGE_SIZE, total)
-    else histVisible.value = Math.min(cur + ORDER_PAGE_SIZE, total)
-  }
-}
-
-function shownHint(which: 'open' | 'history'): string {
-  const total = which === 'open' ? openOrders.value.length : historyOrders.value.length
-  const cur = which === 'open' ? openShown.value.length : histShown.value.length
-  if (!total) return ''
-  return cur < total ? `已显示 ${cur}/${total} 条 · 下拉到底加载更多` : `已全部加载 ${total} 条`
-}
+const openPage = ref(1)
+const histPage = ref(1)
+const openPageCount = computed(() => Math.max(1, Math.ceil(openOrders.value.length / ORDER_PAGE_SIZE)))
+const histPageCount = computed(() => Math.max(1, Math.ceil(historyOrders.value.length / ORDER_PAGE_SIZE)))
+const openShown = computed(() => {
+  const start = (openPage.value - 1) * ORDER_PAGE_SIZE
+  return openOrders.value.slice(start, start + ORDER_PAGE_SIZE)
+})
+const histShown = computed(() => {
+  const start = (histPage.value - 1) * ORDER_PAGE_SIZE
+  return historyOrders.value.slice(start, start + ORDER_PAGE_SIZE)
+})
+// 刷新后条数变少时，页码回到最后一页，避免停留在空页
+watch(() => openOrders.value.length, (len) => {
+  const max = Math.max(1, Math.ceil(len / ORDER_PAGE_SIZE))
+  if (openPage.value > max) openPage.value = max
+})
+watch(() => historyOrders.value.length, (len) => {
+  const max = Math.max(1, Math.ceil(len / ORDER_PAGE_SIZE))
+  if (histPage.value > max) histPage.value = max
+})
 
 // ===== 表格列 =====
 // 点击任意订单行（持仓/委托/历史）自动把左侧合约与 K 线切换到该订单品种
@@ -1811,7 +1809,7 @@ onBeforeUnmount(() => {
               </div>
             </n-tab-pane>
             <n-tab-pane name="orders" tab="当前委托">
-              <div class="orders-scroll" @scroll="onOrdersScroll('open', $event)">
+              <div class="orders-scroll">
                 <n-empty v-if="!openShown.length" size="small" description="暂无委托"/>
                 <template v-else>
                   <n-data-table
@@ -1823,12 +1821,15 @@ onBeforeUnmount(() => {
                     :single-line="false"
                     :scroll-x="820"
                   />
-                  <div class="load-hint">{{ shownHint('open') }}</div>
+                  <div class="orders-pager">
+                    <n-pagination v-model:page="openPage" :page-count="openPageCount" :page-slot="7" size="small"/>
+                    <span class="orders-pager-total">共 {{ openOrders.length }} 条</span>
+                  </div>
                 </template>
               </div>
             </n-tab-pane>
             <n-tab-pane name="history" tab="历史委托">
-              <div class="orders-scroll" @scroll="onOrdersScroll('history', $event)">
+              <div class="orders-scroll">
                 <n-empty v-if="!histShown.length" size="small" description="暂无历史委托"/>
                 <template v-else>
                   <n-data-table
@@ -1840,7 +1841,10 @@ onBeforeUnmount(() => {
                     :single-line="false"
                     :scroll-x="1010"
                   />
-                  <div class="load-hint">{{ shownHint('history') }}</div>
+                  <div class="orders-pager">
+                    <n-pagination v-model:page="histPage" :page-count="histPageCount" :page-slot="7" size="small"/>
+                    <span class="orders-pager-total">共 {{ historyOrders.length }} 条</span>
+                  </div>
                 </template>
               </div>
             </n-tab-pane>
@@ -2439,6 +2443,21 @@ onBeforeUnmount(() => {
   font-size: 11px;
   opacity: 0.55;
   padding: 6px 0 2px;
+}
+
+/* 订单列表分页条：左侧页码，右侧总数 */
+.orders-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0 2px;
+}
+
+.orders-pager-total {
+  font-size: 12px;
+  opacity: 0.6;
+  white-space: nowrap;
 }
 
 .trade-tabs :deep(.n-data-table-th) {

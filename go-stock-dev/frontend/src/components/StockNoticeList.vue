@@ -111,11 +111,11 @@ function getmMarketCode(market,code) {
     <n-tbody>
       <n-tr v-for="item in list" :key="item.art_code">
         <n-td>
-          <n-popover trigger="hover" placement="right">
+          <n-popover trigger="hover" placement="right" :flip="true" :shift="true" :show-arrow="false">
             <template #trigger>
               <n-tag type="info"  :bordered="false">{{item.codes[0].stock_code }}</n-tag>
             </template>
-            <money-trend style="width: 800px" :code="getmMarketCode(item.codes[0].market_code,item.codes[0].stock_code)" :name="item.codes[0].short_name"  :days="360" :dark-theme="true" :chart-height="500"></money-trend>
+            <money-trend style="width: 720px" :code="getmMarketCode(item.codes[0].market_code,item.codes[0].stock_code)" :name="item.codes[0].short_name"  :days="360" :dark-theme="true" :chart-height="400"></money-trend>
           </n-popover>
         </n-td>
         <n-td>

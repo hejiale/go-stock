@@ -281,11 +281,11 @@ function handleEXPLANATION(value, option){
           <!--                  <n-text :type="item.BILLBOARD_NET_AMT>0?'error':'success'">{{ (item.BILLBOARD_NET_AMT/10000).toFixed(2) }}</n-text>-->
 
 
-          <n-popover trigger="hover" placement="right">
+          <n-popover trigger="hover" placement="right" :flip="true" :shift="true" :show-arrow="false">
             <template #trigger>
               <n-button tag="a"  text :type="item.BILLBOARD_NET_AMT>0?'error':'success'" :bordered=false >{{ fmtAmount(item.BILLBOARD_NET_AMT) }}</n-button>
             </template>
-            <money-trend :code="item.SECUCODE.split('.')[1].toLowerCase()+item.SECUCODE.split('.')[0]" :name="item.SECURITY_NAME_ABBR" :days="360" :dark-theme="true" :chart-height="500" style="width: 800px"></money-trend>
+            <money-trend :code="item.SECUCODE.split('.')[1].toLowerCase()+item.SECUCODE.split('.')[0]" :name="item.SECURITY_NAME_ABBR" :days="360" :dark-theme="true" :chart-height="400" style="width: 720px"></money-trend>
           </n-popover>
 
         </n-td>

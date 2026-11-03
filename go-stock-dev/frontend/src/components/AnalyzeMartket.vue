@@ -689,7 +689,7 @@ function renderLimitChart(data, el) {
     title: {
       text: '涨跌停家数比',
       left: 'center',
-      textStyle: {color: darkTheme ? '#ccc' : '#333', fontSize: 14}
+      textStyle: {color: darkTheme ? '#d9dde3' : '#333', fontSize: 13, fontWeight: 600}
     },
     tooltip: {
       trigger: 'axis',
@@ -709,10 +709,13 @@ function renderLimitChart(data, el) {
     },
     legend: {
       data: ['涨停家数', '跌停家数'],
-      top: 30,
-      textStyle: {color: darkTheme ? '#ccc' : '#333'}
+      top: 36,
+      itemWidth: 12,
+      itemHeight: 8,
+      itemGap: 10,
+      textStyle: {color: darkTheme ? '#c9cdd4' : '#333', fontSize: 10}
     },
-    grid: {left: '3%', right: '4%', bottom: '3%', top: 56, containLabel: true},
+    grid: {left: '3%', right: '4%', bottom: '3%', top: 68, containLabel: true},
     xAxis: {
       type: 'category',
       data: times,
@@ -826,7 +829,7 @@ function renderTlineChart(items, anchors, el) {
     title: {
       text: '指数分时 · 板块异动标记',
       left: 'center',
-      textStyle: {color: textColor, fontSize: 14}
+      textStyle: {color: textColor, fontSize: 13, fontWeight: 600}
     },
     tooltip: {
       trigger: 'axis',
@@ -858,10 +861,13 @@ function renderTlineChart(items, anchors, el) {
     },
     legend: {
       data: ['指数点位', '板块异动'],
-      top: 30,
-      textStyle: {color: textColor}
+      top: 36,
+      itemWidth: 12,
+      itemHeight: 8,
+      itemGap: 10,
+      textStyle: {color: textColor, fontSize: 10}
     },
-    grid: {left: '3%', right: '4%', bottom: '3%', top: 56, containLabel: true},
+    grid: {left: '3%', right: '4%', bottom: '3%', top: 68, containLabel: true},
     xAxis: {
       type: 'category',
       data: times,
@@ -925,25 +931,28 @@ function renderTlineChart(items, anchors, el) {
         type: 'scatter',
         data: scatterData,
         symbol: 'circle',
-        symbolSize: 12,
+        symbolSize: 8,
         z: 10,
+        itemStyle: {
+          borderWidth: 1
+        },
         label: {
           show: true,
           position: 'right',
-          distance: 6,
+          distance: 8,
           formatter: function (param) {
             if (param.data && param.data.sectors) {
               return param.data.sectors.map(s => s.name).join('/')
             }
             return ''
           },
-          fontSize: 10,
+          fontSize: 11,
           fontWeight: 'bold',
-          color: textColor,
-          backgroundColor: darkTheme ? 'rgba(50,50,55,0.9)' : 'rgba(255,255,255,0.9)',
-          padding: [1, 4],
-          borderRadius: 3,
-          borderColor: darkTheme ? '#666' : '#ddd',
+          color: darkTheme ? '#e5e7eb' : '#1f2937',
+          backgroundColor: darkTheme ? 'rgba(30,30,36,0.92)' : 'rgba(255,255,255,0.95)',
+          padding: [2, 6],
+          borderRadius: 4,
+          borderColor: darkTheme ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.12)',
           borderWidth: 0.5
         },
         emphasis: {
@@ -996,8 +1005,9 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
     darkMode: darkTheme,
     title: {
       text: '融资融券走势' + (updateTime ? '（' + updateTime + '）' : ''),
-      left: 'center',
-      textStyle: {color: darkTheme ? '#ccc' : '#333', fontSize: 13}
+      left: 10,
+      top: 6,
+      textStyle: {color: darkTheme ? '#d9dde3' : '#333', fontSize: 13, fontWeight: 600}
     },
     tooltip: {
       trigger: 'axis',
@@ -1016,10 +1026,14 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
     },
     legend: {
       data: ['融资余额', '融资净买入'],
-      top: 30,
-      textStyle: {color: textColor, fontSize: 11}
+      top: 6,
+      right: 26,
+      itemWidth: 12,
+      itemHeight: 8,
+      itemGap: 10,
+      textStyle: {color: textColor, fontSize: 10}
     },
-    grid: {left: '3%', right: '4%', bottom: '3%', top: 56, containLabel: true},
+    grid: {left: 62, right: 78, bottom: 26, top: 54, containLabel: false},
     xAxis: {
       type: 'category',
       data: dates,
@@ -1035,24 +1049,24 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
     },
     yAxis: [
       {
-        name: '融资余额(' + rzyeUnit + ')',
+        name: '余额(' + rzyeUnit + ')',
         type: 'value',
         position: 'left',
-        nameTextStyle: {color: textColor, fontSize: 11, align: 'left'},
-        nameGap: 10,
+        nameTextStyle: {color: textColor, fontSize: 10, align: 'left'},
+        nameGap: 8,
         axisLine: {show: true, lineStyle: {color: axisColor}},
         splitLine: {lineStyle: {color: splitColor, type: 'dashed'}},
-        axisLabel: {color: textColor, fontSize: 11}
+        axisLabel: {color: textColor, fontSize: 10}
       },
       {
-        name: '融资净买入(' + rzjlrUnit + ')',
+        name: '净买入(' + rzjlrUnit + ')',
         type: 'value',
         position: 'right',
-        nameTextStyle: {color: textColor, fontSize: 11, align: 'right'},
-        nameGap: 10,
+        nameTextStyle: {color: textColor, fontSize: 10, align: 'right'},
+        nameGap: 8,
         axisLine: {show: true, lineStyle: {color: axisColor}},
         splitLine: {show: false},
-        axisLabel: {color: textColor, fontSize: 11}
+        axisLabel: {color: textColor, fontSize: 10}
       }
     ],
     series: [
@@ -1146,7 +1160,7 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
 
     <!-- 指数分时图 + 涨跌停图 + 融资融券走势 三图一行（右上角可全屏查看） -->
     <div style="display:flex;gap:8px;align-items:stretch;--wails-draggable:no-drag">
-      <div style="flex:1;min-width:0;position:relative;--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
+      <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div ref="tlineChartRef" style="width:100%;height:100%;--wails-draggable:no-drag"></div>
         <n-button class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
                   @click="openFullscreen('tline')">
@@ -1155,7 +1169,7 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
           </template>
         </n-button>
       </div>
-      <div style="flex:1;min-width:0;position:relative;--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
+      <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div ref="limitChartRef" style="width:100%;height:100%;--wails-draggable:no-drag"></div>
         <n-button class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
                   @click="openFullscreen('limit')">
@@ -1164,7 +1178,7 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
           </template>
         </n-button>
       </div>
-      <div style="flex:1;min-width:0;position:relative;--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
+      <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div ref="rzrqChartRef" style="width:100%;height:100%;--wails-draggable:no-drag"></div>
         <n-button class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
                   @click="openFullscreen('rzrq')">
@@ -1206,7 +1220,7 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
     </div>
     <div v-show="koreaChartsVisible"
          style="display:flex;gap:8px;align-items:stretch;margin-top:4px;--wails-draggable:no-drag">
-      <div style="flex:1;min-width:0;position:relative;--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
+      <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div style="position:absolute;top:2px;right:4px;z-index:5;--wails-draggable:no-drag">
           <n-button-group size="tiny">
             <n-button size="tiny" :type="kospiMode==='trend' ? 'primary' : 'default'"
@@ -1221,7 +1235,7 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
           <n-text type="error" style="font-size:12px">韩国KOSPI {{ koreaCardError('kospi') }}</n-text>
         </div>
       </div>
-      <div style="flex:1;min-width:0;position:relative;--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
+      <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div style="position:absolute;top:2px;right:4px;z-index:5;--wails-draggable:no-drag">
           <n-button-group size="tiny">
             <n-button size="tiny" :type="hynixMode==='trend' ? 'primary' : 'default'"
@@ -1236,7 +1250,7 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
           <n-text type="error" style="font-size:12px">SK海力士 {{ koreaCardError('hynix') }}</n-text>
         </div>
       </div>
-      <div style="flex:1;min-width:0;position:relative;--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
+      <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div style="position:absolute;top:2px;right:4px;z-index:5;--wails-draggable:no-drag">
           <n-button-group size="tiny">
             <n-button size="tiny" :type="samsungMode==='trend' ? 'primary' : 'default'"
@@ -1256,6 +1270,23 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
 </template>
 
 <style scoped>
+/* 图表卡片：统一底色、边框与悬停反馈，让首页的三图/韩股三图更像一组面板 */
+.home-chart-card {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  border: 1px solid rgba(128, 128, 128, 0.16);
+  border-radius: 8px;
+  background: rgba(128, 128, 128, 0.04);
+  padding: 2px 2px 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.home-chart-card:hover {
+  border-color: rgba(64, 158, 255, 0.35);
+  background: rgba(64, 158, 255, 0.05);
+}
+
 /* 图表右上角全屏查看按钮：默认半透明，悬停/聚焦时高亮 */
 .chart-expand-btn {
   position: absolute;
