@@ -69,6 +69,27 @@ let tlineCache = null
 let limitCache = null
 let rzrqCache = null
 
+// 主图空数据占位：接口返回空数组或请求失败时显示占位，避免卡片只剩空白
+const tlineEmpty = ref(false)
+const limitEmpty = ref(false)
+const rzrqEmpty = ref(false)
+const chartEmptyState = {
+  tline: {flag: tlineEmpty, el: tlineChartRef},
+  limit: {flag: limitEmpty, el: limitChartRef},
+  rzrq: {flag: rzrqEmpty, el: rzrqChartRef},
+}
+
+function setChartEmpty(type, empty) {
+  const state = chartEmptyState[type]
+  if (!state) return
+  state.flag.value = empty
+  // 切到无数据的日期时清掉上一份图，避免旧图残留在占位层后面
+  if (empty && state.el.value) {
+    const inst = echarts.getInstanceByDom(state.el.value)
+    if (inst) inst.clear()
+  }
+}
+
 function openFullscreen(type) {
   fullscreenType.value = type
   showFullscreen.value = true
@@ -268,10 +289,16 @@ async function handleChart() {
       : await GetMarketStatisticByDate(selectedDateStr.value)
     if (data && data.length > 0) {
       limitCache = data
+      setChartEmpty('limit', false)
       renderLimitChart(data)
+    } else {
+      limitCache = null
+      setChartEmpty('limit', true)
     }
   } catch (error) {
     console.error('获取市场统计数据失败:', error)
+    limitCache = null
+    setChartEmpty('limit', true)
   }
 }
 
@@ -285,10 +312,16 @@ async function handleTlineChart() {
     console.log('[AnalyzeMartket] date:', selectedDateStr.value, 'tline:', tlineResult?.items?.length, 'items, anchors:', (anchors || []).length)
     if (tlineResult && tlineResult.items && tlineResult.items.length > 0) {
       tlineCache = {items: tlineResult.items, anchors: anchors || []}
+      setChartEmpty('tline', false)
       renderTlineChart(tlineResult.items, anchors || [])
+    } else {
+      tlineCache = null
+      setChartEmpty('tline', true)
     }
   } catch (error) {
     console.error('获取指数分时数据失败:', error)
+    tlineCache = null
+    setChartEmpty('tline', true)
   }
 }
 
@@ -984,10 +1017,16 @@ async function handleRzrqChart() {
         rzjlrUnit: res.rzjlrUnit || '亿',
         updateTime: res.updateTime || ''
       }
+      setChartEmpty('rzrq', false)
       renderRzrqChart(res.items, res.rzyeUnit || '亿', res.rzjlrUnit || '亿', res.updateTime || '')
+    } else {
+      rzrqCache = null
+      setChartEmpty('rzrq', true)
     }
   } catch (error) {
     console.error('获取融资融券走势数据失败:', error)
+    rzrqCache = null
+    setChartEmpty('rzrq', true)
   }
 }
 
@@ -1162,7 +1201,10 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
     <div style="display:flex;gap:8px;align-items:stretch;--wails-draggable:no-drag">
       <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div ref="tlineChartRef" style="width:100%;height:100%;--wails-draggable:no-drag"></div>
-        <n-button class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
+        <div v-if="tlineEmpty" class="chart-empty-state">
+          <n-empty size="small" description="暂无分时数据"/>
+        </div>
+        <n-button v-if="!tlineEmpty" class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
                   @click="openFullscreen('tline')">
           <template #icon>
             <n-icon :component="ExpandOutline"/>
@@ -1171,7 +1213,14 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
       </div>
       <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div ref="limitChartRef" style="width:100%;height:100%;--wails-draggable:no-drag"></div>
-        <n-button class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
+        <div v-if="limitEmpty" class="chart-empty-state">
+          <n-empty size="small" description="暂无数据">
+            <template #extra>
+              <n-text depth="3" style="font-size:12px">交易时段每 5 分钟采集一次</n-text>
+            </template>
+          </n-empty>
+        </div>
+        <n-button v-if="!limitEmpty" class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
                   @click="openFullscreen('limit')">
           <template #icon>
             <n-icon :component="ExpandOutline"/>
@@ -1180,7 +1229,10 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
       </div>
       <div class="home-chart-card" style="--wails-draggable:no-drag" :style="{height:chartHeight+'px'}">
         <div ref="rzrqChartRef" style="width:100%;height:100%;--wails-draggable:no-drag"></div>
-        <n-button class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
+        <div v-if="rzrqEmpty" class="chart-empty-state">
+          <n-empty size="small" description="暂无融资融券数据"/>
+        </div>
+        <n-button v-if="!rzrqEmpty" class="chart-expand-btn" size="tiny" quaternary title="全屏查看"
                   @click="openFullscreen('rzrq')">
           <template #icon>
             <n-icon :component="ExpandOutline"/>
@@ -1285,6 +1337,17 @@ function renderRzrqChart(items, rzyeUnit, rzjlrUnit, updateTime, el) {
 .home-chart-card:hover {
   border-color: rgba(64, 158, 255, 0.35);
   background: rgba(64, 158, 255, 0.05);
+}
+
+/* 图表空数据占位：居中显示，但不拦截右上角全屏按钮的点击 */
+.chart-empty-state {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 /* 图表右上角全屏查看按钮：默认半透明，悬停/聚焦时高亮 */
