@@ -156,7 +156,7 @@
             <MdPreview
               :theme="theme"
               :style="{ textAlign: 'left' }"
-              :model-value="isStreamLoad && isLast && group.assistantMsg.content ? group.assistantMsg.content + ' ▍' : (group.assistantMsg.content || '...')"
+              :model-value="isStreamLoad && isLast && typedContent ? typedContent + ' ▍' : (typedContent || '...')"
               :editor-id="'agent-msg-' + group.assistantIndex"
               :sanitize="sanitizeMd"
               class="msg-markdown"
@@ -282,6 +282,7 @@
 // 从 FloatingAgentAssistant.vue 拆出（阶段2），展示逻辑内置、业务动作通过事件上抛。
 // 展开状态（expanded）与折叠面板状态（reasoningMap）由父组件按会话持久化管理。
 import { NButton, NIcon, NImage, NPopover, NSpin } from 'naive-ui'
+import { ref, watch, onBeforeUnmount } from 'vue'
 import {
   ChevronDownOutline,
   ChevronForwardOutline,
@@ -328,6 +329,69 @@ const props = defineProps({
   /** 当前选中模型 id（菜单中打勾标识） */
   currentModelId: { type: [Number, String], default: null }
 })
+
+// ---- 打字机效果 ----
+// 后端即使把整段回答一次性送达，这里也按字符逐步展示；
+// 增量流式时则作为平滑队列，避免网络分片抖动导致文字忽快忽慢。
+const typedContent = ref('')
+let typingTarget = ''
+let typingTimer = null
+
+function stopTyping() {
+  if (typingTimer) {
+    clearInterval(typingTimer)
+    typingTimer = null
+  }
+}
+
+function tickTyping() {
+  if (typedContent.value.length >= typingTarget.length) {
+    stopTyping()
+    return
+  }
+  const remain = typingTarget.length - typedContent.value.length
+  // 固定上限的逐字速度：短文本自然收尾，长回答约 500~600 字/秒
+  const step = Math.min(12, Math.max(1, Math.ceil(remain / 60)))
+  typedContent.value = typingTarget.slice(0, typedContent.value.length + step)
+  if (typedContent.value.length >= typingTarget.length) stopTyping()
+}
+
+function syncTypedContent() {
+  const target = props.group?.assistantMsg?.content || ''
+  typingTarget = target
+
+  // 历史消息 / 非末条：直接展示，不做动画
+  if (!props.isLast) {
+    stopTyping()
+    typedContent.value = target
+    return
+  }
+  if (!target) {
+    stopTyping()
+    typedContent.value = ''
+    return
+  }
+  // 最终 markdown 格式化会整体替换内容。
+  // 只有目标变短（撤回/重置）才直接同步；变长时保留已显示部分继续逐字，
+  // 避免“刚打完一半，DONE 一到就整段跳出”。
+  if (typedContent.value && !target.startsWith(typedContent.value)) {
+    if (target.length <= typedContent.value.length) {
+      typedContent.value = target
+      stopTyping()
+      return
+    }
+    typedContent.value = target.slice(0, typedContent.value.length)
+  }
+  if (!typingTimer) typingTimer = setInterval(tickTyping, 20)
+}
+
+watch(
+  () => props.group?.assistantMsg?.content,
+  syncTypedContent,
+  { immediate: true }
+)
+
+onBeforeUnmount(stopTyping)
 
 const emit = defineEmits([
   'toggle-expand',
