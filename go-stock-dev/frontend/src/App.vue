@@ -33,7 +33,7 @@ import {AnalyzeSentiment, GetConfig, GetEffectiveSponsorVip, GetGroupList, GetVe
 // 侧边悬浮入口（AI 助手 / 信号监控）均为 VIP2 门控功能，暂未开通时先隐藏
 // 开通赞助后删除下面三行注释即可恢复
 // import FloatingAiAssistant from "./components/FloatingAiAssistant.vue";
-// import FloatingAgentAssistant from "./components/FloatingAgentAssistant.vue";
+import FloatingAgentAssistant from "./components/FloatingAgentAssistant.vue";
 // import SignalMonitorPanel from "./components/SignalMonitorPanel.vue";
 import {Dragon, Fire, FirefoxBrowser, Gripfire, Robot} from "@vicons/fa";
 import {Prompt, ReportAnalytics, ReportMoney, ReportSearch, TrendingUp} from "@vicons/tabler";
@@ -1747,9 +1747,9 @@ onMounted(() => {
                 :rotate="-15"
             >
 <!--              <FloatingAiAssistant />-->
-              <!-- 侧边悬浮入口：AI 助手 / 信号监控 均为 VIP2 门控功能，暂未开通时隐藏；开通后取消注释即可恢复 -->
-              <!--
+              <!-- 侧边悬浮入口：AI 助手 / 信号监控 均为 VIP2 门控功能 -->
               <FloatingAgentAssistant />
+              <!--
               <SignalMonitorPanel />
               -->
               <n-flex>

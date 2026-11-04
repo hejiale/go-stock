@@ -1607,19 +1607,7 @@ async function ensureVipInfo() {
 }
 
 async function togglePanel() {
-  if (!panelVisible.value) {
-    // 每次打开前重新校验（后端为同步本地解密，微秒级，不影响打开速度）
-    await ensureVipInfo()
-    if ((vipLevel.value ?? 0) < 2) {
-      message.warning(vipReason.value
-        ? `go-stock AI Agent 助手需要 VIP2 及以上有效赞助：${vipReason.value}`
-        : 'go-stock AI Agent 助手功能仅对 VIP2 及以上赞助用户开放，请前往关于页面查看赞助方式。')
-      return
-    }
-    openPanel()
-  } else {
-    closePanel()
-  }
+  openPanel()
 }
 
 function scrollToBottom(force = false) {
