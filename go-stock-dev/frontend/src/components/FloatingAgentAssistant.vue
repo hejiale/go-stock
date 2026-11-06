@@ -520,21 +520,19 @@
 import { ref, reactive, computed, watch, nextTick, onMounted, onBeforeUnmount, onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { NButton, NCard, NEmpty, NIcon, NImage, NInput, NModal, NPopconfirm, NPopover, NScrollbar, NSelect, NSpin, NSwitch, useMessage } from 'naive-ui'
-import {
-  CloseOutline,
-  SparklesOutline,
-  ShareSocialOutline,
-  ImageOutline,
-  AddOutline,
-  ChatbubblesOutline,
-  SearchOutline,
-  TrashOutline,
-  CreateOutline,
-  BookmarkOutline,
-  EyeOutline,
-  EyeOffOutline,
-  DownloadOutline
-} from '@vicons/ionicons5'
+import CloseOutline from '@vicons/ionicons5/es/CloseOutline'
+import SparklesOutline from '@vicons/ionicons5/es/SparklesOutline'
+import ShareSocialOutline from '@vicons/ionicons5/es/ShareSocialOutline'
+import ImageOutline from '@vicons/ionicons5/es/ImageOutline'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import ChatbubblesOutline from '@vicons/ionicons5/es/ChatbubblesOutline'
+import SearchOutline from '@vicons/ionicons5/es/SearchOutline'
+import TrashOutline from '@vicons/ionicons5/es/TrashOutline'
+import CreateOutline from '@vicons/ionicons5/es/CreateOutline'
+import BookmarkOutline from '@vicons/ionicons5/es/BookmarkOutline'
+import EyeOutline from '@vicons/ionicons5/es/EyeOutline'
+import EyeOffOutline from '@vicons/ionicons5/es/EyeOffOutline'
+import DownloadOutline from '@vicons/ionicons5/es/DownloadOutline'
 import {
   ListFilesystemSkills,
   GetAiConfigs,

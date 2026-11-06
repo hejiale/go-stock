@@ -26,7 +26,9 @@ import NewsList from "./newsList.vue";
 import PolicyNewsList from "./PolicyNewsList.vue";
 import KLineChart from "./KLineChart.vue";
 import StockLightweightKlineChart from "./StockLightweightKlineChart.vue";
-import { CaretDown, CaretUp, PulseOutline,} from "@vicons/ionicons5";
+import CaretDown from '@vicons/ionicons5/es/CaretDown'
+import CaretUp from '@vicons/ionicons5/es/CaretUp'
+import PulseOutline from '@vicons/ionicons5/es/PulseOutline'
 import {NAvatar, NButton, NFlex, NText, useMessage, useNotification} from "naive-ui";
 import {MdPreview} from "md-editor-v3";
 import {useRoute} from 'vue-router'

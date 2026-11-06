@@ -743,19 +743,31 @@ import {
   NDrawer, NDrawerContent, NDescriptions, NDescriptionsItem, NDivider,
   NEmpty, NTabs, NTabPane, NSelect, NPagination
 } from 'naive-ui'
-import {
-  SearchOutline, AddOutline, RefreshOutline, TrashOutline,
-  CheckmarkCircleOutline, FolderOpenOutline, CloudUploadOutline,
-  CheckmarkCircleSharp, CloseCircleSharp, CubeOutline, HelpCircleOutline,
-  ChatbubblesOutline, SendOutline,
-  StopCircleOutline, ChevronDownOutline, ChevronUpOutline,
-  ChevronForwardOutline, ChevronBackOutline,
-  CopyOutline, ImageOutline, ShareSocialOutline
-} from '@vicons/ionicons5'
-import {
-  LayoutSidebarLeftCollapse, LayoutSidebarRightCollapse,
-  LayoutSidebarLeftExpand, LayoutSidebarRightExpand
-} from '@vicons/tabler'
+import SearchOutline from '@vicons/ionicons5/es/SearchOutline'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import RefreshOutline from '@vicons/ionicons5/es/RefreshOutline'
+import TrashOutline from '@vicons/ionicons5/es/TrashOutline'
+import CheckmarkCircleOutline from '@vicons/ionicons5/es/CheckmarkCircleOutline'
+import FolderOpenOutline from '@vicons/ionicons5/es/FolderOpenOutline'
+import CloudUploadOutline from '@vicons/ionicons5/es/CloudUploadOutline'
+import CheckmarkCircleSharp from '@vicons/ionicons5/es/CheckmarkCircleSharp'
+import CloseCircleSharp from '@vicons/ionicons5/es/CloseCircleSharp'
+import CubeOutline from '@vicons/ionicons5/es/CubeOutline'
+import HelpCircleOutline from '@vicons/ionicons5/es/HelpCircleOutline'
+import ChatbubblesOutline from '@vicons/ionicons5/es/ChatbubblesOutline'
+import SendOutline from '@vicons/ionicons5/es/SendOutline'
+import StopCircleOutline from '@vicons/ionicons5/es/StopCircleOutline'
+import ChevronDownOutline from '@vicons/ionicons5/es/ChevronDownOutline'
+import ChevronUpOutline from '@vicons/ionicons5/es/ChevronUpOutline'
+import ChevronForwardOutline from '@vicons/ionicons5/es/ChevronForwardOutline'
+import ChevronBackOutline from '@vicons/ionicons5/es/ChevronBackOutline'
+import CopyOutline from '@vicons/ionicons5/es/CopyOutline'
+import ImageOutline from '@vicons/ionicons5/es/ImageOutline'
+import ShareSocialOutline from '@vicons/ionicons5/es/ShareSocialOutline'
+import LayoutSidebarLeftCollapse from '@vicons/tabler/es/LayoutSidebarLeftCollapse'
+import LayoutSidebarRightCollapse from '@vicons/tabler/es/LayoutSidebarRightCollapse'
+import LayoutSidebarLeftExpand from '@vicons/tabler/es/LayoutSidebarLeftExpand'
+import LayoutSidebarRightExpand from '@vicons/tabler/es/LayoutSidebarRightExpand'
 import {
   ListKnowledgeBases, CreateKnowledgeBase, DeleteKnowledgeBase,
   UploadKBFiles, AddKBDocument, SearchKnowledgeBase,

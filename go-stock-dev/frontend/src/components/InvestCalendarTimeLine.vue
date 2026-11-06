@@ -5,7 +5,7 @@ import { addMonths, format ,parse} from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 
 import {useMessage} from 'naive-ui'
-import {Star48Filled} from "@vicons/fluent";
+import Star48Filled from '@vicons/fluent/es/Star48Filled'
 const today = new Date();
 const year = today.getFullYear();
 const month = String(today.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要+1

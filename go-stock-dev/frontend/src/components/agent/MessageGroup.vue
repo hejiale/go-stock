@@ -283,22 +283,20 @@
 // 展开状态（expanded）与折叠面板状态（reasoningMap）由父组件按会话持久化管理。
 import { NButton, NIcon, NImage, NPopover, NSpin } from 'naive-ui'
 import { ref, watch, onBeforeUnmount } from 'vue'
-import {
-  ChevronDownOutline,
-  ChevronForwardOutline,
-  ChevronUpOutline,
-  PersonCircleOutline,
-  SparklesOutline,
-  CreateOutline,
-  CopyOutline,
-  ImageOutline,
-  DocumentTextOutline,
-  ShareSocialOutline,
-  RefreshOutline,
-  SwapHorizontalOutline,
-  OpenOutline,
-  ChatbubbleEllipsesOutline
-} from '@vicons/ionicons5'
+import ChevronDownOutline from '@vicons/ionicons5/es/ChevronDownOutline'
+import ChevronForwardOutline from '@vicons/ionicons5/es/ChevronForwardOutline'
+import ChevronUpOutline from '@vicons/ionicons5/es/ChevronUpOutline'
+import PersonCircleOutline from '@vicons/ionicons5/es/PersonCircleOutline'
+import SparklesOutline from '@vicons/ionicons5/es/SparklesOutline'
+import CreateOutline from '@vicons/ionicons5/es/CreateOutline'
+import CopyOutline from '@vicons/ionicons5/es/CopyOutline'
+import ImageOutline from '@vicons/ionicons5/es/ImageOutline'
+import DocumentTextOutline from '@vicons/ionicons5/es/DocumentTextOutline'
+import ShareSocialOutline from '@vicons/ionicons5/es/ShareSocialOutline'
+import RefreshOutline from '@vicons/ionicons5/es/RefreshOutline'
+import SwapHorizontalOutline from '@vicons/ionicons5/es/SwapHorizontalOutline'
+import OpenOutline from '@vicons/ionicons5/es/OpenOutline'
+import ChatbubbleEllipsesOutline from '@vicons/ionicons5/es/ChatbubbleEllipsesOutline'
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/preview.css'
 import { sanitizeMd } from './format'

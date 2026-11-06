@@ -303,17 +303,15 @@
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount, onBeforeMount, h } from 'vue'
 import { useRoute } from 'vue-router'
 import { NAvatar, NButton, NCard, NIcon, NInput, NScrollbar, NSelect, NSpin, NSwitch, useMessage, useNotification } from 'naive-ui'
-import {
-  ChatbubbleEllipsesOutline,
-  ChevronDownOutline,
-  ChevronUpOutline,
-  CloseOutline,
-  SparklesOutline,
-  PersonCircleOutline,
-  CopyOutline,
-  ShareSocialOutline,
-  ImageOutline
-} from '@vicons/ionicons5'
+import ChatbubbleEllipsesOutline from '@vicons/ionicons5/es/ChatbubbleEllipsesOutline'
+import ChevronDownOutline from '@vicons/ionicons5/es/ChevronDownOutline'
+import ChevronUpOutline from '@vicons/ionicons5/es/ChevronUpOutline'
+import CloseOutline from '@vicons/ionicons5/es/CloseOutline'
+import SparklesOutline from '@vicons/ionicons5/es/SparklesOutline'
+import PersonCircleOutline from '@vicons/ionicons5/es/PersonCircleOutline'
+import CopyOutline from '@vicons/ionicons5/es/CopyOutline'
+import ShareSocialOutline from '@vicons/ionicons5/es/ShareSocialOutline'
+import ImageOutline from '@vicons/ionicons5/es/ImageOutline'
 import { AbortSummaryStockNews, GetAiAssistantSession, GetAiConfigs, GetConfig, GetEffectiveSponsorVip, GetPromptTemplates, GetVersionInfo, SaveAiAssistantSession, ShareText, SummaryStockNews } from '../../wailsjs/go/main/App'
 import { EventsOn, EventsOff } from '../../wailsjs/runtime'
 import { MdPreview } from 'md-editor-v3'

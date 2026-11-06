@@ -12,7 +12,9 @@ import {
   NButton, NCard, NCheckbox, NCheckboxGroup, NDatePicker, NEmpty, NFlex, NIcon, NInput, NModal,
   NPopconfirm, NScrollbar, NSelect, NSwitch, NTabPane, NTabs, NTag, NText, NTooltip, useMessage,
 } from 'naive-ui'
-import { CloseOutline, PulseOutline, StatsChartOutline } from '@vicons/ionicons5'
+import CloseOutline from '@vicons/ionicons5/es/CloseOutline'
+import PulseOutline from '@vicons/ionicons5/es/PulseOutline'
+import StatsChartOutline from '@vicons/ionicons5/es/StatsChartOutline'
 import { GetStockList, GetConfig, GetVersionInfo, GetBinanceFuturesSymbols, GetBitgetFuturesSymbols, GetOKXTradingOverview, GetOkxInstruments, GetSignalTradePage, ClearSignalTradeRecords } from '../../wailsjs/go/main/App'
 import StockLightweightKlineChart from './StockLightweightKlineChart.vue'
 import MarketSignalScanPanel from './MarketSignalScanPanel.vue'

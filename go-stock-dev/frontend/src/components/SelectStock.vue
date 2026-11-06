@@ -3,7 +3,12 @@ import {h, onBeforeMount, onMounted, onUnmounted, ref, reactive, computed, watch
 import {SearchStock, GetHotStrategy, OpenURL, Follow, GetFollowList, GetAllCustomStrategies, SaveCustomStrategy, DeleteCustomStrategy, GetEffectiveSponsorVip, GetConfig, GetGroupList, AddStockGroup, AddGroup, ExportTableToXLSX} from "../../wailsjs/go/main/App";
 import {useMessage, NText, NTag, NButton, NPopconfirm, NDropdown, NIcon} from 'naive-ui'
 import {Environment} from "../../wailsjs/runtime"
-import {BookmarkOutline, TrashOutline, CreateOutline, AddOutline, FolderOpenOutline, DownloadOutline} from "@vicons/ionicons5";
+import BookmarkOutline from '@vicons/ionicons5/es/BookmarkOutline'
+import TrashOutline from '@vicons/ionicons5/es/TrashOutline'
+import CreateOutline from '@vicons/ionicons5/es/CreateOutline'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import FolderOpenOutline from '@vicons/ionicons5/es/FolderOpenOutline'
+import DownloadOutline from '@vicons/ionicons5/es/DownloadOutline'
 import {EventsEmit} from "../../wailsjs/runtime";
 import StockLightweightKlineChart from "./StockLightweightKlineChart.vue";
 import { KLINE_MODAL_CONTENT_STYLE, KLINE_MODAL_STYLE, useKlineModalFit } from "./kline/useKlineModalFit";

@@ -230,20 +230,18 @@ import {
 } from 'naive-ui'
 import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
-import {
-  SearchOutline,
-  AddOutline,
-  PlayOutline,
-  PauseOutline,
-  TrashOutline,
-  CreateOutline,
-  PlayCircleOutline,
-  StopCircleOutline,
-  CheckmarkCircleOutline,
-  FlashOutline,
-  EyeOutline,
-  LockClosedOutline
-} from '@vicons/ionicons5'
+import SearchOutline from '@vicons/ionicons5/es/SearchOutline'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import PlayOutline from '@vicons/ionicons5/es/PlayOutline'
+import PauseOutline from '@vicons/ionicons5/es/PauseOutline'
+import TrashOutline from '@vicons/ionicons5/es/TrashOutline'
+import CreateOutline from '@vicons/ionicons5/es/CreateOutline'
+import PlayCircleOutline from '@vicons/ionicons5/es/PlayCircleOutline'
+import StopCircleOutline from '@vicons/ionicons5/es/StopCircleOutline'
+import CheckmarkCircleOutline from '@vicons/ionicons5/es/CheckmarkCircleOutline'
+import FlashOutline from '@vicons/ionicons5/es/FlashOutline'
+import EyeOutline from '@vicons/ionicons5/es/EyeOutline'
+import LockClosedOutline from '@vicons/ionicons5/es/LockClosedOutline'
 import {
   CreateMCPServer,
   UpdateMCPServer,

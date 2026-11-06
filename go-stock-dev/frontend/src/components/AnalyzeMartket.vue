@@ -14,7 +14,10 @@ import {
 } from "../../wailsjs/go/main/App";
 import * as echarts from "echarts";
 import {onMounted, onUnmounted, ref, computed, nextTick, watch} from "vue";
-import {ChevronDownOutline, ChevronForwardOutline, ExpandOutline, CloseOutline} from "@vicons/ionicons5";
+import ChevronDownOutline from '@vicons/ionicons5/es/ChevronDownOutline'
+import ChevronForwardOutline from '@vicons/ionicons5/es/ChevronForwardOutline'
+import ExpandOutline from '@vicons/ionicons5/es/ExpandOutline'
+import CloseOutline from '@vicons/ionicons5/es/CloseOutline'
 const {darkTheme, chartHeight} = defineProps({
   chartHeight: {
     type: Number,

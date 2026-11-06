@@ -12,7 +12,9 @@ import KLineChart from "./KLineChart.vue";
 import StockLightweightKlineChart from "./StockLightweightKlineChart.vue";
 import { KLINE_MODAL_CONTENT_STYLE, KLINE_MODAL_STYLE, useKlineModalFit } from "./kline/useKlineModalFit";
 import { EventsEmit } from "../../wailsjs/runtime";
-import {FolderOpenOutline, AddOutline, DownloadOutline} from "@vicons/ionicons5";
+import FolderOpenOutline from '@vicons/ionicons5/es/FolderOpenOutline'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import DownloadOutline from '@vicons/ionicons5/es/DownloadOutline'
 import {format} from "date-fns";
 
 const notify = useNotification()

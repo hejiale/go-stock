@@ -2,7 +2,7 @@
 import {onBeforeMount, ref} from 'vue'
 import {LongTigerRank, GetLhbSeatDetail} from "../../wailsjs/go/main/App";
 import {BrowserOpenURL} from "../../wailsjs/runtime";
-import {ArrowDownOutline} from "@vicons/ionicons5";
+import ArrowDownOutline from '@vicons/ionicons5/es/ArrowDownOutline'
 import _ from "lodash";
 import KLineChart from "./KLineChart.vue";
 import MoneyTrend from "./moneyTrend.vue";

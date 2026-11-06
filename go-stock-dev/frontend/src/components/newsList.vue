@@ -1,6 +1,8 @@
 <script setup>
 import {ReFleshTelegraphList} from "../../wailsjs/go/main/App";
-import {RefreshCircle, RefreshCircleSharp, RefreshOutline} from "@vicons/ionicons5";
+import RefreshCircle from '@vicons/ionicons5/es/RefreshCircle'
+import RefreshCircleSharp from '@vicons/ionicons5/es/RefreshCircleSharp'
+import RefreshOutline from '@vicons/ionicons5/es/RefreshOutline'
 import {computed, h, onBeforeMount, onBeforeUnmount, onMounted,onUnmounted, ref} from 'vue'
 
 const { headerTitle,newsList } = defineProps({

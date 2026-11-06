@@ -1,7 +1,12 @@
 <script setup>
 import {onBeforeMount, ref} from 'vue'
 import {GetStockList, IndustryResearchReport,EMDictCode} from "../../wailsjs/go/main/App";
-import {ArrowDownOutline, CaretDown, CaretUp, PulseOutline, Refresh, RefreshCircleSharp,} from "@vicons/ionicons5";
+import ArrowDownOutline from '@vicons/ionicons5/es/ArrowDownOutline'
+import CaretDown from '@vicons/ionicons5/es/CaretDown'
+import CaretUp from '@vicons/ionicons5/es/CaretUp'
+import PulseOutline from '@vicons/ionicons5/es/PulseOutline'
+import Refresh from '@vicons/ionicons5/es/Refresh'
+import RefreshCircleSharp from '@vicons/ionicons5/es/RefreshCircleSharp'
 
 import {useMessage} from "naive-ui";
 import {BrowserOpenURL} from "../../wailsjs/runtime";

@@ -1,6 +1,8 @@
 <script setup>
 import {h, onBeforeMount, onBeforeUnmount, onMounted, reactive, ref, computed, watch} from "vue";
-import {Add, ChatboxOutline, RefreshOutline} from "@vicons/ionicons5";
+import Add from '@vicons/ionicons5/es/Add'
+import ChatboxOutline from '@vicons/ionicons5/es/ChatboxOutline'
+import RefreshOutline from '@vicons/ionicons5/es/RefreshOutline'
 import {NButton, NEllipsis, NText, useMessage, NTag, NModal, NDataTable, NPopover, NIcon} from "naive-ui";
 import {
   FollowFund,

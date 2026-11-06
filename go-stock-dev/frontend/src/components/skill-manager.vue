@@ -279,7 +279,14 @@ import {
   NLayout, NLayoutSider, NTree, NDivider, NText, NEmpty, NSwitch, NCard, NSpin,
   NDescriptions, NDescriptionsItem, useMessage
 } from 'naive-ui'
-import { AddOutline, TrashOutline, CloudDownloadOutline, CloudUploadOutline, FolderOpenOutline, SaveOutline, RefreshOutline, CreateOutline } from '@vicons/ionicons5'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import TrashOutline from '@vicons/ionicons5/es/TrashOutline'
+import CloudDownloadOutline from '@vicons/ionicons5/es/CloudDownloadOutline'
+import CloudUploadOutline from '@vicons/ionicons5/es/CloudUploadOutline'
+import FolderOpenOutline from '@vicons/ionicons5/es/FolderOpenOutline'
+import SaveOutline from '@vicons/ionicons5/es/SaveOutline'
+import RefreshOutline from '@vicons/ionicons5/es/RefreshOutline'
+import CreateOutline from '@vicons/ionicons5/es/CreateOutline'
 import SkillPlaza from './skillPlaza.vue'
 import { MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'

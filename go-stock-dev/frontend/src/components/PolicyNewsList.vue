@@ -137,7 +137,7 @@ import {
   GetStoredPolicyNews,
   SaveKeyDepartments
 } from '../../wailsjs/go/main/App'
-import {RefreshCircleSharp} from '@vicons/ionicons5'
+import RefreshCircleSharp from '@vicons/ionicons5/es/RefreshCircleSharp'
 import {useMessage} from 'naive-ui'
 import {BrowserOpenURL, EventsOn} from '../../wailsjs/runtime/runtime'
 

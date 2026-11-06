@@ -11,35 +11,74 @@ import {
 import {h, onBeforeMount, onBeforeUnmount, onMounted, ref, watch} from "vue";
 import {RouterLink, useRoute, useRouter} from 'vue-router'
 import {createDiscreteApi,darkTheme,lightTheme , NIcon, NText,NButton,NProgress,dateZhCN,zhCN} from 'naive-ui'
-import {
-  AlarmOutline,
-  AnalyticsOutline,
-  BarChartSharp, Bonfire, BonfireOutline, BookOutline, CalendarOutline, DiamondOutline, DocumentTextOutline, EaselSharp,
-  ExpandOutline, Flag,
-  Flame, FlameSharp, FlaskOutline, GlobeOutline, HomeOutline, InformationOutline,
-  LogoGithub,
-  ChatbubblesOutline,
-  NewspaperOutline,
-  NewspaperSharp, Notifications,
-  PowerOutline, Pulse,
-  ReorderTwoOutline,
-  SettingsOutline, ServerOutline, ScaleOutline, Skull, SkullOutline, SkullSharp,
-  SparklesOutline, FlashOutline, Star,
-  StarOutline,
-  StatsChartOutline, SwapHorizontalOutline,
-  Wallet, WarningOutline, TimeOutline, SearchOutline, BookmarkOutline,
-} from '@vicons/ionicons5'
+import AlarmOutline from '@vicons/ionicons5/es/AlarmOutline'
+import AnalyticsOutline from '@vicons/ionicons5/es/AnalyticsOutline'
+import BarChartSharp from '@vicons/ionicons5/es/BarChartSharp'
+import Bonfire from '@vicons/ionicons5/es/Bonfire'
+import BonfireOutline from '@vicons/ionicons5/es/BonfireOutline'
+import BookOutline from '@vicons/ionicons5/es/BookOutline'
+import CalendarOutline from '@vicons/ionicons5/es/CalendarOutline'
+import DiamondOutline from '@vicons/ionicons5/es/DiamondOutline'
+import DocumentTextOutline from '@vicons/ionicons5/es/DocumentTextOutline'
+import EaselSharp from '@vicons/ionicons5/es/EaselSharp'
+import ExpandOutline from '@vicons/ionicons5/es/ExpandOutline'
+import Flag from '@vicons/ionicons5/es/Flag'
+import Flame from '@vicons/ionicons5/es/Flame'
+import FlameSharp from '@vicons/ionicons5/es/FlameSharp'
+import FlaskOutline from '@vicons/ionicons5/es/FlaskOutline'
+import GlobeOutline from '@vicons/ionicons5/es/GlobeOutline'
+import HomeOutline from '@vicons/ionicons5/es/HomeOutline'
+import InformationOutline from '@vicons/ionicons5/es/InformationOutline'
+import LogoGithub from '@vicons/ionicons5/es/LogoGithub'
+import ChatbubblesOutline from '@vicons/ionicons5/es/ChatbubblesOutline'
+import NewspaperOutline from '@vicons/ionicons5/es/NewspaperOutline'
+import NewspaperSharp from '@vicons/ionicons5/es/NewspaperSharp'
+import Notifications from '@vicons/ionicons5/es/Notifications'
+import PowerOutline from '@vicons/ionicons5/es/PowerOutline'
+import Pulse from '@vicons/ionicons5/es/Pulse'
+import ReorderTwoOutline from '@vicons/ionicons5/es/ReorderTwoOutline'
+import SettingsOutline from '@vicons/ionicons5/es/SettingsOutline'
+import ServerOutline from '@vicons/ionicons5/es/ServerOutline'
+import ScaleOutline from '@vicons/ionicons5/es/ScaleOutline'
+import Skull from '@vicons/ionicons5/es/Skull'
+import SkullOutline from '@vicons/ionicons5/es/SkullOutline'
+import SkullSharp from '@vicons/ionicons5/es/SkullSharp'
+import SparklesOutline from '@vicons/ionicons5/es/SparklesOutline'
+import FlashOutline from '@vicons/ionicons5/es/FlashOutline'
+import Star from '@vicons/ionicons5/es/Star'
+import StarOutline from '@vicons/ionicons5/es/StarOutline'
+import StatsChartOutline from '@vicons/ionicons5/es/StatsChartOutline'
+import SwapHorizontalOutline from '@vicons/ionicons5/es/SwapHorizontalOutline'
+import Wallet from '@vicons/ionicons5/es/Wallet'
+import WarningOutline from '@vicons/ionicons5/es/WarningOutline'
+import TimeOutline from '@vicons/ionicons5/es/TimeOutline'
+import SearchOutline from '@vicons/ionicons5/es/SearchOutline'
+import BookmarkOutline from '@vicons/ionicons5/es/BookmarkOutline'
 import {AnalyzeSentiment, GetConfig, GetEffectiveSponsorVip, GetGroupList, GetVersionInfo, IsTradingTime, IsHKTradingTime, IsUSTradingTime, RestartApp} from "../wailsjs/go/main/App";
 // 侧边悬浮入口（AI 助手 / 信号监控）均为 VIP2 门控功能，暂未开通时先隐藏
 // 开通赞助后删除下面三行注释即可恢复
 // import FloatingAiAssistant from "./components/FloatingAiAssistant.vue";
 import FloatingAgentAssistant from "./components/FloatingAgentAssistant.vue";
 // import SignalMonitorPanel from "./components/SignalMonitorPanel.vue";
-import {Dragon, Fire, FirefoxBrowser, Gripfire, Robot} from "@vicons/fa";
-import {Prompt, ReportAnalytics, ReportMoney, ReportSearch, TrendingUp} from "@vicons/tabler";
-import {LocalFireDepartmentRound} from "@vicons/material";
-import {AppsList20Regular, BoxSearch20Regular,SlideHide24Filled, CommentNote20Filled} from "@vicons/fluent";
-import {FireFilled, MoneyCollectOutlined, NotificationFilled, StockOutlined} from "@vicons/antd";
+import Dragon from '@vicons/fa/es/Dragon'
+import Fire from '@vicons/fa/es/Fire'
+import FirefoxBrowser from '@vicons/fa/es/FirefoxBrowser'
+import Gripfire from '@vicons/fa/es/Gripfire'
+import Robot from '@vicons/fa/es/Robot'
+import Prompt from '@vicons/tabler/es/Prompt'
+import ReportAnalytics from '@vicons/tabler/es/ReportAnalytics'
+import ReportMoney from '@vicons/tabler/es/ReportMoney'
+import ReportSearch from '@vicons/tabler/es/ReportSearch'
+import TrendingUp from '@vicons/tabler/es/TrendingUp'
+import LocalFireDepartmentRound from '@vicons/material/es/LocalFireDepartmentRound'
+import AppsList20Regular from '@vicons/fluent/es/AppsList20Regular'
+import BoxSearch20Regular from '@vicons/fluent/es/BoxSearch20Regular'
+import SlideHide24Filled from '@vicons/fluent/es/SlideHide24Filled'
+import CommentNote20Filled from '@vicons/fluent/es/CommentNote20Filled'
+import FireFilled from '@vicons/antd/es/FireFilled'
+import MoneyCollectOutlined from '@vicons/antd/es/MoneyCollectOutlined'
+import NotificationFilled from '@vicons/antd/es/NotificationFilled'
+import StockOutlined from '@vicons/antd/es/StockOutlined'
 
 
 

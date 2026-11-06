@@ -2,7 +2,8 @@
 import {onBeforeMount, onBeforeUnmount, ref} from 'vue'
 import {HotStock, IsTradingTime} from "../../wailsjs/go/main/App";
 import KLineChart from "./KLineChart.vue";
-import {ArrowDown, ArrowUp} from "@vicons/ionicons5";
+import ArrowDown from '@vicons/ionicons5/es/ArrowDown'
+import ArrowUp from '@vicons/ionicons5/es/ArrowUp'
 
 const {marketType}=defineProps(
     {

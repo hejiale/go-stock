@@ -566,21 +566,19 @@
 <script setup>
 import { ref, reactive, onMounted, computed, h, watch } from 'vue'
 import { NButton, NIcon, NTag, NSpace, NPopconfirm, useMessage, NText, NCard, NRadioGroup, NRadio, NInputNumber, NSelect, NAlert, NCode, NSwitch } from 'naive-ui'
-import {
-  SearchOutline,
-  AddOutline,
-  PlayOutline,
-  PauseOutline,
-  TrashOutline,
-  CreateOutline,
-  SettingsOutline,
-  InformationCircleOutline,
-  PlayCircleOutline,
-  StopCircleOutline,
-  CheckmarkCircleOutline,
-  FlashOutline,
-  TimeOutline
-} from '@vicons/ionicons5'
+import SearchOutline from '@vicons/ionicons5/es/SearchOutline'
+import AddOutline from '@vicons/ionicons5/es/AddOutline'
+import PlayOutline from '@vicons/ionicons5/es/PlayOutline'
+import PauseOutline from '@vicons/ionicons5/es/PauseOutline'
+import TrashOutline from '@vicons/ionicons5/es/TrashOutline'
+import CreateOutline from '@vicons/ionicons5/es/CreateOutline'
+import SettingsOutline from '@vicons/ionicons5/es/SettingsOutline'
+import InformationCircleOutline from '@vicons/ionicons5/es/InformationCircleOutline'
+import PlayCircleOutline from '@vicons/ionicons5/es/PlayCircleOutline'
+import StopCircleOutline from '@vicons/ionicons5/es/StopCircleOutline'
+import CheckmarkCircleOutline from '@vicons/ionicons5/es/CheckmarkCircleOutline'
+import FlashOutline from '@vicons/ionicons5/es/FlashOutline'
+import TimeOutline from '@vicons/ionicons5/es/TimeOutline'
 import {
   CreateCronTask,
   UpdateCronTask,
