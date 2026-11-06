@@ -2171,16 +2171,26 @@ func (a *App) shutdown(ctx context.Context) {
 	logger.SugaredLogger.Info("application shutdown 回调触发（正常退出）")
 	// 停止飞书应用机器人长连接
 	a.stopFeishuBotInternal()
-	// 记录当前窗口大小，供下次启动时还原
-	if a.ctx != nil {
-		if w, h := runtime.WindowGetSize(a.ctx); w > 0 && h > 0 {
-			cfg := data.GetSettingConfig()
-			cfg.WindowWidth = w
-			cfg.WindowHeight = h
-			data.UpdateConfig(cfg)
-			//logger.SugaredLogger.Infof("save window size: %dx%d", w, h)
+	// 记录当前窗口大小，供下次启动时还原。
+	// 退出阶段窗口可能已经销毁，Windows 下 WindowGetSize 会因窗口尺寸为 0 触发
+	// 除零 panic（winc.ScaleToDefaultDPI），这里单独 recover，
+	// 避免把整个 shutdown 流程打断、导致后面的数据库关闭没有执行。
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				logger.SugaredLogger.Warnf("退出时读取窗口大小失败: %v", r)
+			}
+		}()
+		if a.ctx != nil {
+			if w, h := runtime.WindowGetSize(a.ctx); w > 0 && h > 0 {
+				cfg := data.GetSettingConfig()
+				cfg.WindowWidth = w
+				cfg.WindowHeight = h
+				data.UpdateConfig(cfg)
+				//logger.SugaredLogger.Infof("save window size: %dx%d", w, h)
+			}
 		}
-	}
+	}()
 	// 优雅关闭数据库：合并 WAL 并释放连接，避免下次启动时扫描恢复脏 WAL 而变慢
 	db.Close(15 * time.Second)
 	_ = logger.SugaredLogger.Sync()
