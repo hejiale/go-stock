@@ -323,6 +323,12 @@ func (a *App) CheckSponsorCode(sponsorCode string) map[string]any {
 	}
 }
 
+// enableAutoUpdate 控制「自动下载更新包并替换程序文件」的能力。
+// 当前分支已停用：CheckUpdate 仍会检查版本（同时负责刷新赞助码/VIP 信息与资讯同步），
+// 但发现新版本时只记录日志，不再下载安装包、不再替换当前程序文件。
+// 如需恢复自动下载，把该值改为 true 即可（下载/安装代码完整保留在下方）。
+const enableAutoUpdate = false
+
 func (a *App) CheckUpdate(flag int) {
 	// 手动检查（flag==1）时向前端持续反馈进度。
 	// GitHub API 与代理测速在国内网络下可能耗时数十秒，若中间状态不推送，
@@ -456,6 +462,15 @@ func (a *App) CheckUpdate(flag int) {
 	}
 
 	if releaseVersion.TagName != Version {
+		// 自动下载更新包功能已停用：不创建临时文件、不下载、不调用 update.Apply 替换程序文件，
+		// 因此也不会再弹「下载进度 / 需要管理员权限 / 立即重启」等更新界面。
+		if !enableAutoUpdate {
+			logger.SugaredLogger.Infof("发现新版本 %s，自动下载已停用，跳过更新", releaseVersion.TagName)
+			emitStatus("preparing", "发现新版本 "+releaseVersion.TagName+"，已停用自动下载。")
+			emitDone(true)
+			return
+		}
+
 		emitStatus("preparing", "发现新版本 "+releaseVersion.TagName+"，正在准备更新...")
 
 		tag := &models.Tag{}

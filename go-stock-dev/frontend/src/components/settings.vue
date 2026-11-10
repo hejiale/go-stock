@@ -943,6 +943,8 @@ function deletePrompt(ID) {
             <n-form-item-gi :span="6" label="暗黑主题：" path="darkTheme">
               <n-switch v-model:value="formValue.darkTheme"/>
             </n-form-item-gi>
+            <!-- 自动更新已停用：「更新通道」设置项一并隐藏（配置字段仍保留，避免读写配置时丢值）。
+                 如需恢复：取消下面这段注释即可。
             <n-form-item-gi :span="8" label="更新通道：" path="updateChannel">
               <n-select v-model:value="formValue.updateChannel" :options="updateChannelOptions" />
               <n-tooltip placement="top">
@@ -963,6 +965,7 @@ function deletePrompt(ID) {
                 </template>
               </n-tooltip>
             </n-form-item-gi>
+            -->
             <n-form-item-gi :span="10" label="浏览器安装路径：" path="browserPath">
               <n-input type="text" placeholder="浏览器安装路径" v-model:value="formValue.browserPath" clearable/>
             </n-form-item-gi>

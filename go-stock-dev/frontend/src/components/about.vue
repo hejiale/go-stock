@@ -360,10 +360,13 @@ EventsOn("updateNeedAdmin", (msg) => {
               <template v-else>{{ vipReason || 'VIP 未生效' }}<template v-if="!vipActive && vipStartTime">（生效时间：{{ vipStartTime }}）</template></template>
             </n-gradient-text>
             <n-flex justify="center" :size="12" class="hero-actions">
+              <!-- 自动更新已停用，「检查更新」入口一并隐藏（后端 CheckUpdate 也不再下载更新包）。
+                   如需恢复：取消下面这段注释，并把 app.go 里的 enableAutoUpdate 改为 true。
               <n-button size="small" @click="onCheckUpdate" :loading="checking" :disabled="checking" type="info" tertiary round>
                 <template #icon>🔄</template>
                 {{ checking ? '检查中...' : '检查更新' }}
               </n-button>
+              -->
               <n-button size="small" @click="openManual" type="success" tertiary round>
                 <template #icon>📖</template>
                 查看用户手册
